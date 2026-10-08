@@ -39,6 +39,60 @@ async function loadHealth() {
   }
 }
 
+async function loadSettings() {
+  try {
+    const settings = await api("/api/settings");
+    $("jevState").textContent = settings.typesafe_api_key.set
+      ? settings.typesafe_api_key.hint
+      : "not set";
+    $("jevState").classList.toggle("ok", settings.typesafe_api_key.set);
+    $("ghState").textContent = settings.github_token.set
+      ? settings.github_token.hint
+      : "not set";
+    $("ghState").classList.toggle("ok", settings.github_token.set);
+    $("judgeMode").textContent = `judge: ${settings.judge_mode}`;
+    $("tokenPill").textContent = `github token: ${settings.github_token.set ? "set" : "missing (60 req/h)"}`;
+  } catch (_) {
+    /* health pill already covers the failure case */
+  }
+}
+
+async function saveSettings(event) {
+  event.preventDefault();
+  const button = $("settingsSaveBtn");
+  const status = $("settingsStatus");
+  const body = {};
+  const jev = $("jevKeyInput").value.trim();
+  const github = $("ghKeyInput").value.trim();
+  if (jev) body.typesafe_api_key = jev;
+  if (github) body.github_token = github;
+  if (!Object.keys(body).length) {
+    status.textContent = "paste a key first — blank inputs keep the current keys";
+    status.className = "settings-status warn";
+    return;
+  }
+  button.disabled = true;
+  status.textContent = "saving…";
+  status.className = "settings-status";
+  try {
+    const saved = await api("/api/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    $("jevKeyInput").value = "";
+    $("ghKeyInput").value = "";
+    status.textContent = `saved — judge mode: ${saved.judge_mode}`;
+    status.className = "settings-status ok";
+    await loadSettings();
+  } catch (error) {
+    status.textContent = `failed: ${error.message}`;
+    status.className = "settings-status warn";
+  } finally {
+    button.disabled = false;
+  }
+}
+
 function setProgress(stage, progress, label) {
   $("progressBar").style.width = `${Math.round(progress * 100)}%`;
   $("progressLabel").textContent = label || stage;
@@ -293,4 +347,7 @@ $("scanForm").addEventListener("submit", (event) => {
   startScan($("repoInput").value.trim());
 });
 
+$("settingsForm").addEventListener("submit", saveSettings);
+
 loadHealth();
+loadSettings();

@@ -41,6 +41,43 @@
       <div id="errorBox" class="error-box hidden"></div>
     </section>
 
+    <section class="settings-box">
+      <details id="settingsPanel">
+        <summary>Settings — API keys</summary>
+        <form id="settingsForm" class="settings-form">
+          <label class="settings-field">
+            <span>Jev / TypeSafe API key <em id="jevState" class="key-state">…</em></span>
+            <input
+              id="jevKeyInput"
+              type="password"
+              placeholder="paste a new key to save — leave blank to keep the current one"
+              autocomplete="off"
+            />
+          </label>
+          <label class="settings-field">
+            <span>
+              GitHub token <em id="ghState" class="key-state">…</em>
+              <small class="field-hint">optional: 5000 req/h + Discussions</small>
+            </span>
+            <input
+              id="ghKeyInput"
+              type="password"
+              placeholder="ghp_… — leave blank to keep the current one"
+              autocomplete="off"
+            />
+          </label>
+          <div class="settings-actions">
+            <button type="submit" id="settingsSaveBtn">Save keys</button>
+            <span id="settingsStatus" class="settings-status"></span>
+          </div>
+          <p class="settings-note">
+            Keys are stored on the server (data/settings.json) and survive restarts.
+            They are never echoed back to the browser.
+          </p>
+        </form>
+      </details>
+    </section>
+
     <section id="repoMeta" class="repo-meta hidden"></section>
 
     <section id="topSection" class="hidden">

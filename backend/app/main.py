@@ -15,7 +15,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from backend.app.config import REPO_ROOT, get_settings
+from backend.app.config import REPO_ROOT, get_settings, save_settings
 from backend.app.db.database import db_session, fetch_all, fetch_one, init_db, insert
 from backend.app.github.client import GitHubError, RateLimitExceeded
 from backend.app.memory.context import FEEDBACK_KINDS, ProjectContext
@@ -53,6 +53,11 @@ class ScanRequest(BaseModel):
 class FeedbackRequest(BaseModel):
     kind: str = Field(..., min_length=3, max_length=20)
     note: str = Field(default="", max_length=2000)
+
+
+class SettingsRequest(BaseModel):
+    typesafe_api_key: str = Field(default="", max_length=500)
+    github_token: str = Field(default="", max_length=500)
 
 
 def parse_repo(value: str) -> str:
@@ -122,6 +127,45 @@ def health() -> dict[str, Any]:
         "status": "ok",
         "judge_mode": settings.judge_mode,
         "github_token": bool(settings.github_token),
+    }
+
+
+def _key_hint(value: str) -> dict[str, Any]:
+    if not value:
+        return {"set": False, "hint": "not set"}
+    tail = value[-4:] if len(value) >= 4 else value
+    return {"set": True, "hint": f"••••{tail}"}
+
+
+@app.get("/api/settings")
+def read_settings() -> dict[str, Any]:
+    settings = get_settings()
+    return {
+        "typesafe_api_key": _key_hint(settings.typesafe_api_key),
+        "github_token": _key_hint(settings.github_token),
+        "judge_mode": settings.judge_mode,
+    }
+
+
+@app.post("/api/settings")
+def write_settings(payload: SettingsRequest) -> dict[str, Any]:
+    updates = {
+        key: value.strip()
+        for key, value in (
+            ("typesafe_api_key", payload.typesafe_api_key),
+            ("github_token", payload.github_token),
+        )
+        if value.strip()
+    }
+    if not updates:
+        raise HTTPException(status_code=422, detail="paste at least one non-empty key")
+    save_settings(updates)
+    settings = get_settings()
+    return {
+        "ok": True,
+        "judge_mode": settings.judge_mode,
+        "typesafe_api_key": _key_hint(settings.typesafe_api_key),
+        "github_token": _key_hint(settings.github_token),
     }
 
 

@@ -25,6 +25,45 @@ def test_health_reports_judge_mode(client):
     assert body["judge_mode"] == "heuristic"
 
 
+def test_settings_roundtrip_persists_and_switches_judge(client, tmp_settings):
+    import os
+
+    from backend.app import config as app_config
+    from backend.app.config import load_saved_settings
+
+    try:
+        before = client.get("/api/settings").json()
+        assert before["typesafe_api_key"]["set"] is False
+        assert before["judge_mode"] == "heuristic"
+
+        saved = client.post(
+            "/api/settings", json={"typesafe_api_key": "apikey_test_1234abcd"}
+        ).json()
+        assert saved["ok"] is True
+        assert saved["judge_mode"] == "jev"
+        assert saved["typesafe_api_key"]["hint"].endswith("abcd")
+        assert "apikey_test" not in saved["typesafe_api_key"]["hint"]
+
+        after = client.get("/api/settings").json()
+        assert after["typesafe_api_key"]["set"] is True
+        assert after["judge_mode"] == "jev"
+
+        assert load_saved_settings(tmp_settings.data_dir)["typesafe_api_key"] == (
+            "apikey_test_1234abcd"
+        )
+
+        health = client.get("/api/health").json()
+        assert health["judge_mode"] == "jev"
+    finally:
+        os.environ.pop("TYPESAFE_API_KEY", None)
+        app_config.reset_settings()
+
+
+def test_settings_blank_payload_rejected(client):
+    response = client.post("/api/settings", json={"typesafe_api_key": "   "})
+    assert response.status_code == 422
+
+
 def test_index_served(client):
     response = client.get("/")
     assert response.status_code == 200

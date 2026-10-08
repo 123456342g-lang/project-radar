@@ -90,6 +90,8 @@ irm https://raw.githubusercontent.com/123456342g-lang/project-radar/main/scripts
 | `POST /api/problems/{id}/feedback` | `confirm` / `reject` / `split` / `solved` / `minor` |
 | `GET /api/repos` · `GET /api/repos/{owner}/{name}/context` | 已扫描仓库 + 学到的上下文 |
 | `POST /api/repos/{owner}/{name}/context/non_goals` | 记录非目标 |
+| `GET /api/settings` | 已保存密钥的掩码视图(完整值永不返回浏览器) |
+| `POST /api/settings` | 在 GUI 中保存 Jev key / GitHub token(重启后仍生效) |
 | `GET /api/health` | 存活检查 |
 
 ## 报告格式

@@ -146,4 +146,40 @@ main { max-width: 1080px; margin: 0 auto; padding: 0 20px 80px; }
 
 .site-footer { max-width: 1080px; margin: 40px auto 0; padding: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
+.settings-box { margin-top: 18px; }
+.settings-box details {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 12px 18px;
+}
+.settings-box summary {
+  cursor: pointer; font-weight: 600; font-size: 14.5px; color: var(--muted);
+  letter-spacing: 0.2px;
+}
+.settings-box details[open] summary { color: var(--text); margin-bottom: 6px; }
+.settings-form { display: grid; gap: 14px; }
+.settings-field { display: grid; gap: 6px; font-size: 13.5px; }
+.settings-field .key-state {
+  font-style: normal; font-family: ui-monospace, monospace; font-size: 12px;
+  color: var(--warn); margin-left: 6px;
+}
+.settings-field .key-state.ok { color: var(--accent); }
+.settings-field .field-hint { color: var(--muted); font-size: 12px; margin-left: 8px; }
+.settings-field input {
+  padding: 10px 12px; font-size: 14px;
+  background: var(--panel-2); color: var(--text);
+  border: 1px solid var(--line); border-radius: 9px; outline: none;
+}
+.settings-field input:focus { border-color: var(--accent-2); }
+.settings-actions { display: flex; gap: 12px; align-items: center; }
+#settingsSaveBtn {
+  padding: 8px 18px; font-size: 13.5px; font-weight: 600;
+  background: linear-gradient(180deg, #58e0b4, #35b98d);
+  color: #06231a; border: none; border-radius: 9px; cursor: pointer;
+}
+#settingsSaveBtn:disabled { opacity: 0.55; cursor: wait; }
+.settings-status { font-size: 13px; color: var(--muted); }
+.settings-status.ok { color: var(--accent); }
+.settings-status.warn { color: var(--warn); }
+.settings-note { margin: 0; font-size: 12px; color: var(--muted); }
+
 .hidden { display: none !important; }

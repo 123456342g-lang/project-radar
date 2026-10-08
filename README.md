@@ -90,6 +90,8 @@ Keys are read only by the backend and never sent to the browser.
 | `POST /api/problems/{id}/feedback` | `confirm` / `reject` / `split` / `solved` / `minor` |
 | `GET /api/repos` · `GET /api/repos/{owner}/{name}/context` | scanned repos + learned context |
 | `POST /api/repos/{owner}/{name}/context/non_goals` | record a non-goal |
+| `GET /api/settings` | saved keys as masked hints (full values never leave the server) |
+| `POST /api/settings` | save the Jev key / GitHub token from the GUI (persisted across restarts) |
 | `GET /api/health` | liveness |
 
 ## Report format
