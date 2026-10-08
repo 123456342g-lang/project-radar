@@ -40,10 +40,10 @@ GitHub ──▶ collect ──▶ normalize/dedupe ──▶ cluster ──▶ 
 ```bash
 pip install -r requirements.txt
 cp .env.example .env            # optional: add GITHUB_TOKEN / TYPESAFE_API_KEY
-uvicorn backend.app.main:app --reload
+uvicorn backend.app.main:app --reload --port 8020
 ```
 
-Open http://127.0.0.1:8000 — the UI is served from the same process.
+Open http://127.0.0.1:8020 — the UI is served from the same process.
 
 ### Docker
 

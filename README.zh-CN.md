@@ -40,10 +40,10 @@ GitHub ──▶ 采集 ──▶ 规范化/去重 ──▶ 聚类 ──▶ �
 ```bash
 pip install -r requirements.txt
 cp .env.example .env            # 可选:填入 GITHUB_TOKEN / TYPESAFE_API_KEY
-uvicorn backend.app.main:app --reload
+uvicorn backend.app.main:app --reload --port 8020
 ```
 
-打开 http://127.0.0.1:8000 —— UI 与后端同进程提供。
+打开 http://127.0.0.1:8020 —— UI 与后端同进程提供。
 
 ### Docker
 
