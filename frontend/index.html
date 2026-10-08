@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Radar — what is worth building next</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="radar-dot"></span>
+      <h1>Project Radar</h1>
+    </div>
+    <p class="tagline">
+      Not an issue summarizer. A judgment engine: which user voices point at the same
+      problem, is it really unresolved, and is it worth a developer's time.
+    </p>
+    <div class="mode-row">
+      <span class="mode-pill" id="judgeMode">judge: …</span>
+      <span class="mode-pill subtle" id="tokenPill">github token: …</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="scan-box">
+      <form id="scanForm">
+        <input
+          id="repoInput"
+          type="text"
+          placeholder="https://github.com/owner/repo  or  owner/repo"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" id="scanBtn">Scan</button>
+      </form>
+      <div id="progressWrap" class="progress-wrap hidden">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">starting…</div>
+      </div>
+      <div id="errorBox" class="error-box hidden"></div>
+    </section>
+
+    <section id="repoMeta" class="repo-meta hidden"></section>
+
+    <section id="topSection" class="hidden">
+      <h2 class="section-title">The 3 things worth doing</h2>
+      <div id="topList" class="top-list"></div>
+    </section>
+
+    <section id="candidatesSection" class="hidden">
+      <h2 class="section-title">Top 20 candidates</h2>
+      <table class="candidate-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Problem</th><th>Type</th><th>Priority</th>
+            <th>Same?</th><th>Unresolved</th><th>Worth</th>
+          </tr>
+        </thead>
+        <tbody id="candidateRows"></tbody>
+      </table>
+    </section>
+
+    <section id="contextSection" class="hidden">
+      <h2 class="section-title">Project context (memory)</h2>
+      <pre id="contextBox" class="context-box"></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Jev provides typed probabilistic decisions (noul / score / choice). Counting, ranking
+      and evidence are deterministic code. Human feedback steers the next scan.
+    </p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
