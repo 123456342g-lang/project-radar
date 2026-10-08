@@ -1,5 +1,7 @@
 # Project Radar
 
+**English** | [简体中文](./README.zh-CN.md)
+
 Scan a public GitHub repository and get the **Top 3 problems worth building** — ranked, evidenced, and explained.
 
 Project Radar collects issues, pull requests, and discussions, groups them into recurring problems, judges each group with **typed judgments** (via [Jev / TypeSafe API](https://typesafe.ai), with a deterministic heuristic fallback), and scores everything with a transparent ranking engine. Every conclusion links back to the exact issues and PRs that support it.
