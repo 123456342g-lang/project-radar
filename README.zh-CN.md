@@ -35,21 +35,29 @@ GitHub ──▶ 采集 ──▶ 规范化/去重 ──▶ 聚类 ──▶ �
 
 ## 快速开始
 
-### 本地运行
+两种方式 —— 每种都是**一条命令**:自动下载项目、安装/构建、启动服务,并**自动打开浏览器界面**。
 
-```bash
-pip install -r requirements.txt
-cp .env.example .env            # 可选:填入 GITHUB_TOKEN / TYPESAFE_API_KEY
-uvicorn backend.app.main:app --reload --port 8020
+### 方式一 · Python(无需 Docker)
+
+打开 PowerShell,粘贴回车:
+
+```powershell
+irm https://raw.githubusercontent.com/123456342g-lang/project-radar/main/scripts/install.ps1 | iex
 ```
 
-打开 http://127.0.0.1:8020 —— UI 与后端同进程提供。
+前置:[Python 3.10+](https://www.python.org/downloads/)(缺了会自动帮你打开下载页)。
 
-### Docker
+### 方式二 · Docker
 
-```bash
-docker compose up --build
+打开 PowerShell,粘贴回车:
+
+```powershell
+irm https://raw.githubusercontent.com/123456342g-lang/project-radar/main/scripts/install-docker.ps1 | iex
 ```
+
+前置:[Docker Desktop](https://www.docker.com/products/docker-desktop/)(自动检测,没启动会帮你启动)。
+
+两种方式最终都会打开 **http://127.0.0.1:8020** 的图形界面。以后再次运行同一条命令,直接打开界面。
 
 ## 配置
 

@@ -35,21 +35,29 @@ GitHub ──▶ collect ──▶ normalize/dedupe ──▶ cluster ──▶ 
 
 ## Quickstart
 
-### Local
+Two ways — each is **a single command** that downloads everything, starts the service, and opens the GUI in your browser.
 
-```bash
-pip install -r requirements.txt
-cp .env.example .env            # optional: add GITHUB_TOKEN / TYPESAFE_API_KEY
-uvicorn backend.app.main:app --reload --port 8020
+### Option 1 · Python (no Docker)
+
+Open PowerShell and paste:
+
+```powershell
+irm https://raw.githubusercontent.com/123456342g-lang/project-radar/main/scripts/install.ps1 | iex
 ```
 
-Open http://127.0.0.1:8020 — the UI is served from the same process.
+Requires [Python 3.10+](https://www.python.org/downloads/) (the script opens the download page for you if missing).
 
-### Docker
+### Option 2 · Docker
 
-```bash
-docker compose up --build
+Open PowerShell and paste:
+
+```powershell
+irm https://raw.githubusercontent.com/123456342g-lang/project-radar/main/scripts/install-docker.ps1 | iex
 ```
+
+Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/) (auto-detected; the script starts it for you).
+
+Either way, the GUI opens at **http://127.0.0.1:8020**. Run the same command again any time — it just reopens the interface.
 
 ## Configuration
 
