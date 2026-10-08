@@ -45,13 +45,6 @@ uvicorn backend.app.main:app --reload
 
 Open http://127.0.0.1:8000 — the UI is served from the same process.
 
-### CLI
-
-```bash
-python scripts/scan.py owner/repo                  # prints the Top 3
-python scripts/scan.py owner/repo --json out.json  # full report as JSON
-```
-
 ### Docker
 
 ```bash
@@ -123,7 +116,6 @@ backend/app/
   pipeline.py    orchestration
   main.py        FastAPI app
 frontend/        zero-build vanilla JS UI
-scripts/scan.py  CLI entry point
 ```
 
 ## License

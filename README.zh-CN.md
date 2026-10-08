@@ -45,13 +45,6 @@ uvicorn backend.app.main:app --reload
 
 打开 http://127.0.0.1:8000 —— UI 与后端同进程提供。
 
-### 命令行
-
-```bash
-python scripts/scan.py owner/repo                  # 打印 Top 3
-python scripts/scan.py owner/repo --json out.json  # 完整报告导出 JSON
-```
-
 ### Docker
 
 ```bash
@@ -123,7 +116,6 @@ backend/app/
   pipeline.py    编排
   main.py        FastAPI 应用
 frontend/        零构建原生 JS UI
-scripts/scan.py  CLI 入口
 ```
 
 ## 许可证
