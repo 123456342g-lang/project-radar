@@ -59,6 +59,8 @@ Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/) (auto
 
 Either way, the GUI opens at **http://127.0.0.1:8020**. Run the same command again any time — it just reopens the interface.
 
+**Add your key (optional but recommended):** in the GUI, open **Settings — API keys**, paste your `TYPESAFE_API_KEY` from [typesafe.ai](https://typesafe.ai), and click **Save keys** — the Jev judge activates immediately and the key survives restarts. (Editing `.env` works too.)
+
 ## Configuration
 
 Everything is environment-driven (see `.env.example`):

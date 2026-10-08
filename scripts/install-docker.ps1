@@ -69,6 +69,7 @@ if (Test-Gui) {
     Start-Process $gui
     Write-Host "Done! Your browser opened $gui" -ForegroundColor Green
     Write-Host 'Run this same command any time to reopen the interface.'
+    Write-Host 'Tip: paste your Jev key in the GUI "Settings - API keys" panel to enable the Jev judge.'
 } else {
     Write-Host 'Startup timed out - port 8020 may be in use.' -ForegroundColor Red
 }

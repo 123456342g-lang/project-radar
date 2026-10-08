@@ -59,6 +59,8 @@ irm https://raw.githubusercontent.com/123456342g-lang/project-radar/main/scripts
 
 两种方式最终都会打开 **http://127.0.0.1:8020** 的图形界面。以后再次运行同一条命令,直接打开界面。
 
+**填入密钥(可选但推荐)**:在 GUI 中打开 **Settings — API keys**,粘贴你在 [typesafe.ai](https://typesafe.ai) 获取的 `TYPESAFE_API_KEY`,点 **Save keys** —— Jev 判定立即生效,重启后依然保留。(直接改 `.env` 也行。)
+
 ## 配置
 
 全部通过环境变量驱动(见 `.env.example`):
